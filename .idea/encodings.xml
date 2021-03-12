@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8">
+    <file url="file://$PROJECT_DIR$/src/main/java/fr/redline/dblp/db/mysql/DataBase.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/fr/redline/dblp/db/mysql/cmd/ContainsUtil.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/fr/redline/dblp/db/mysql/cmd/DeleteUtil.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/fr/redline/dblp/db/mysql/cmd/InsertUtil.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/fr/redline/dblp/db/mysql/cmd/UpdateUtil.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/fr/redline/dblp/db/mysql/cmd/selutils/Builder.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/fr/redline/dblp/db/mysql/cmd/selutils/SelectUtil.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/fr/redline/dblp/db/mysql/cmd/selutils/selinterface/DistinctInterface.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/fr/redline/dblp/db/mysql/cmd/selutils/selinterface/OrderInterface.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/fr/redline/dblp/db/mysql/key/KeyData.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/fr/redline/dblp/db/mysql/key/Keys.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/fr/redline/dblp/db/mysql/key/Separator.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/fr/redline/dblp/db/mysql/key/Symbol.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/fr/redline/dblp/db/mysql/utils/CommandInterface.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/fr/redline/dblp/db/mysql/utils/CommandUtils.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/fr/redline/dblp/db/mysql/utils/Data.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/fr/redline/dblp/db/mysql/utils/Interface.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/fr/redline/dblp/db/mysql/utils/Interfaced.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/fr/redline/dblp/db/mysql/utils/PositionOption.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/fr/redline/dblp/db/mysql/utils/SelData.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/fr/redline/dblp/db/mysql/utils/UtilInterface.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/fr/redline/dblp/dbv2/redis/RedisDataBase.java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java/fr/redline/dblp/global/SystemColor.java" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
+  </component>
+</project>

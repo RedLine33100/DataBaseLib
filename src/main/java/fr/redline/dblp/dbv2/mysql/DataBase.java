@@ -26,7 +26,7 @@ public class DataBase {
         this.baseName = database;
         this.username = username;
         this.mdp = mdp;
-        dataBaseFile.add(this);
+        DataBase.dataBaseFile.add(this);
     }
 
     public String getDataBase() { return baseName; }
@@ -50,19 +50,19 @@ public class DataBase {
 
     public boolean connect() throws SQLException{
         if(isConnected()) return false;
-        connection = DriverManager.getConnection(this.baseAddress+this.ip+"/"+this.baseName+"?user="+this.username+"&password="+this.mdp); /// removed: "&useUnicode=true&characterEncoding=UTF-8"
+        this.connection = DriverManager.getConnection(this.baseAddress+this.ip+"/"+this.baseName+"?user="+this.username+"&password="+this.mdp); /// removed: "&useUnicode=true&characterEncoding=UTF-8"
         return true;
     }
 
     public void disconnect() throws SQLException{
         if(!isConnected()) return;
-        connection.close();
-        connection = null;
+        this.connection.close();
+        this.connection = null;
     }
 
     ///Connecter ou non
     public boolean isConnected() {
-        return connection != null;
+        return this.connection != null;
     }
 
 
@@ -71,8 +71,9 @@ public class DataBase {
     public void setIp(String ip) {
 
         try {
-            disconnect();
-        } catch (SQLException ignored) {
+            this.disconnect();
+        } catch (SQLException error) {
+            error.printStackTrace();
         }
 
         this.ip = ip;
@@ -82,8 +83,9 @@ public class DataBase {
     public void setAddress(String baseAddress) {
 
         try {
-            disconnect();
-        } catch (SQLException ignored) {
+            this.disconnect();
+        } catch (SQLException error) {
+            error.printStackTrace();
         }
 
         this.baseAddress = baseAddress;
@@ -93,8 +95,9 @@ public class DataBase {
     public void setBaseName(String baseName) {
 
         try {
-            disconnect();
-        } catch (SQLException ignored) {
+            this.disconnect();
+        } catch (SQLException error) {
+            error.printStackTrace();
         }
 
         this.baseName = baseName;
@@ -104,8 +107,9 @@ public class DataBase {
     public void setUser(String user) {
 
         try {
-            disconnect();
-        } catch (SQLException ignored) {
+            this.disconnect();
+        } catch (SQLException error) {
+            error.printStackTrace();
         }
 
         this.username = user;
@@ -115,8 +119,9 @@ public class DataBase {
     public void setMdp(String mdp) {
 
         try {
-            disconnect();
-        } catch (SQLException ignored) {
+            this.disconnect();
+        } catch (SQLException error) {
+            error.printStackTrace();
         }
 
         this.mdp = mdp;
@@ -140,7 +145,8 @@ public class DataBase {
                 CommandUtils.setValues(statement, sqlCmd.getValues());
                 statement.close();
 
-            } catch (SQLException ignored) {
+            } catch (SQLException error) {
+                error.printStackTrace();
             }
 
         };
@@ -160,13 +166,13 @@ public class DataBase {
 
             try {
 
-                PreparedStatement statement = connection.prepareStatement(command);
+                PreparedStatement statement = this.getConnection().prepareStatement(command);
                 CommandUtils.setValues(statement, values);
                 result.set(statement.execute());
                 statement.close();
 
-            }catch (SQLException ignored) {
-
+            }catch (SQLException error) {
+                error.printStackTrace();
             }
 
         };
@@ -191,14 +197,14 @@ public class DataBase {
 
                 SQLCmd sqlCmd = command.getSqlCmd();
 
-                PreparedStatement state = getConnection().prepareStatement(sqlCmd.getCmd());
+                PreparedStatement state = this.getConnection().prepareStatement(sqlCmd.getCmd());
                 CommandUtils.setValues(state, sqlCmd.getValues());
                 objectList.set(CommandUtils.convertResultToObjects(state.executeQuery(), sqlCmd.getColList()));
 
                 state.close();
 
-            } catch (SQLException ignored) {
-
+            } catch (SQLException error) {
+                error.printStackTrace();
             }
 
         };
@@ -219,14 +225,14 @@ public class DataBase {
 
             try {
 
-                PreparedStatement state = getConnection().prepareStatement(command);
+                PreparedStatement state = this.getConnection().prepareStatement(command);
                 CommandUtils.setValues(state, values);
                 objectList.set(CommandUtils.convertResultToObjects(state.executeQuery(), col));
 
                 state.close();
 
-            } catch (SQLException ignored) {
-
+            } catch (SQLException error) {
+                error.printStackTrace();
             }
 
         };
@@ -252,14 +258,14 @@ public class DataBase {
 
                 SQLCmd sqlCmd = command.getSqlCmd();
 
-                PreparedStatement state = getConnection().prepareStatement(sqlCmd.getCmd());
+                PreparedStatement state = this.getConnection().prepareStatement(sqlCmd.getCmd());
                 CommandUtils.setValues(state, sqlCmd.getValues());
                 objectList.set(CommandUtils.convertResultToObject(state.executeQuery(), sqlCmd.getColList()));
 
                 state.close();
 
-            } catch (SQLException ignored) {
-
+            } catch (SQLException error) {
+                error.printStackTrace();
             }
 
         };
@@ -280,13 +286,15 @@ public class DataBase {
         Runnable runnable = () -> {
 
             try {
-                PreparedStatement state = getConnection().prepareStatement(command);
+
+                PreparedStatement state = this.getConnection().prepareStatement(command);
                 CommandUtils.setValues(state, values);
                 objectList.set(CommandUtils.convertResultToObject(state.executeQuery(), col));
 
                 state.close();
-            } catch (SQLException ignored) {
 
+            } catch (SQLException error) {
+                error.printStackTrace();
             }
 
         };
@@ -308,17 +316,16 @@ public class DataBase {
 
             try {
 
-                PreparedStatement state = getConnection().prepareStatement("SELECT " + colon + " FROM " + table + keys.toWhereString());
+                PreparedStatement state = this.getConnection().prepareStatement("SELECT " + colon + " FROM " + table + keys.toWhereString());
                 ResultSet result = state.executeQuery();
 
-                if (result.next()) {
+                if (result.next())
                     object.set(result.getObject(colon));
-                }
 
                 state.close();
 
-            } catch (SQLException ignored) {
-
+            } catch (SQLException error) {
+                error.printStackTrace();
             }
 
         };
@@ -329,9 +336,8 @@ public class DataBase {
         if(object.get() != null)
             return object.get();
 
-        if(tryQuery( new InsertBuilder(table, new LinkedData().addObject(colon, data)), async)){
+        if(tryQuery( new InsertBuilder(table, new LinkedData().addObject(colon, data)), async))
             return data;
-        }
 
         return null;
     }
@@ -350,14 +356,14 @@ public class DataBase {
 
                 SQLCmd sqlCmd = command.getSqlCmd();
 
-                PreparedStatement state = getConnection().prepareStatement(sqlCmd.getCmd());
+                PreparedStatement state = this.getConnection().prepareStatement(sqlCmd.getCmd());
                 CommandUtils.setValues(state, sqlCmd.getValues());
                 ResultSet result = state.executeQuery();
                 resultBoolean.set(result.next());
                 state.close();
 
-            }catch(SQLException ignored){
-
+            }catch(SQLException error){
+                error.printStackTrace();
             }
 
         };

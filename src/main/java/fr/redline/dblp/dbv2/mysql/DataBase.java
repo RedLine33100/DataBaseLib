@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class DataBase {
 
-    private AsyncGestion asyncGestion = new AsyncGestion();
+    private final AsyncGestion asyncGestion = new AsyncGestion();
     private Connection connection;
     private String baseAddress = "jdbc:mysql://", ip, baseName, username, mdp;
     private final static ArrayList<DataBase> dataBaseFile = new ArrayList<>();
@@ -54,7 +54,7 @@ public class DataBase {
         return true;
     }
 
-    public void disconnect()throws SQLException{
+    public void disconnect() throws SQLException{
         if(!isConnected()) return;
         connection.close();
         connection = null;
@@ -271,7 +271,7 @@ public class DataBase {
 
     }
 
-    public LinkedData getData(String command, List<Object> values, List<String> col, boolean async) throws SQLException {
+    public LinkedData getData(String command, List<Object> values, List<String> col, boolean async){
 
         if(!isConnected()) return null;
 
@@ -298,7 +298,7 @@ public class DataBase {
 
     }
 
-    public Object getOrInsert(String table, String colon, Object data, Keys keys, boolean async) throws SQLException {
+    public Object getOrInsert(String table, String colon, Object data, Keys keys, boolean async){
 
         AtomicReference<Object> object = new AtomicReference<>();
 
@@ -336,7 +336,7 @@ public class DataBase {
         return null;
     }
 
-    public boolean containsData(SelectBuilder command, boolean async) throws SQLException {
+    public boolean containsData(SelectBuilder command, boolean async){
 
         if(!isConnected()) return false;
 

@@ -23,31 +23,30 @@ public class LinkedData {
 	}
 
 	public String getString(String colon){
-		return (String) getObject(colon);
+		return String.valueOf(this.getObject(colon));
 	}
 
 	public Integer getInt(String colon){
-		return (Integer) getObject(colon);
+		return (Integer) this.getObject(colon);
 	}
 
 	public Double getDouble(String colon){
-		return (Double) getObject(colon);
+		return (Double) this.getObject(colon);
 	}
 
 	public Float getFloat(String colon){
-		return (Float) getObject(colon);
+		return (Float) this.getObject(colon);
 	}
 	
 	public boolean deleteObject(String colon) {
-		if(!canAddObject(colon)){
+		if(!this.canAddObject(colon)){
 			this.hashMap.remove(colon);
 			return true;
 		} else return false;
 	}
 	
 	public boolean canAddObject(String colon) {
-		if(colon == null) return false;
-		return !hashMap.containsKey(colon);
+		return !this.hashMap.containsKey(colon);
 	}
 	
 	public List<String> getColList() {

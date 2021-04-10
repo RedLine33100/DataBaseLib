@@ -130,16 +130,18 @@ public class DataBase {
 
     /// Cmd part
 
-    public boolean tryQuery(Command command, boolean async){
+    public boolean tryQuery(Command command, final boolean async){
         if(!isConnected()) return false;
 
         AtomicBoolean result = new AtomicBoolean(false);
 
+        SQLCmd sqlCmd = command.getSqlCmd();
+
+        if(sqlCmd == null) return false;
+
         Runnable runnable = () -> {
 
             try {
-
-                SQLCmd sqlCmd = command.getSqlCmd();
 
                 PreparedStatement statement = connection.prepareStatement(sqlCmd.getCmd());
                 CommandUtils.setValues(statement, sqlCmd.getValues());
@@ -157,7 +159,7 @@ public class DataBase {
         return result.get();
     }
 
-    public boolean tryQuery(String command, List<Object> values, boolean async){
+    public boolean tryQuery(String command, List<Object> values, final boolean async){
         if(!isConnected()) return false;
 
         AtomicBoolean result = new AtomicBoolean(false);
@@ -183,7 +185,7 @@ public class DataBase {
         return result.get();
     }
 
-    public List<LinkedData> getDatas(Command command, boolean async){
+    public List<LinkedData> getDatas(Command command, final boolean async){
 
         if(!isConnected()) return null;
 
@@ -215,7 +217,7 @@ public class DataBase {
         return objectList.get();
     }
 
-    public List<LinkedData> getDatas(String command, List<Object> values, List<String> col, boolean async){
+    public List<LinkedData> getDatas(String command, List<Object> values, List<String> col, final boolean async){
 
         if(!isConnected()) return null;
 
@@ -244,7 +246,7 @@ public class DataBase {
 
     }
 
-    public LinkedData getData(Command command, boolean async){
+    public LinkedData getData(Command command, final boolean async){
 
         if(!isConnected()) return null;
 
@@ -277,7 +279,7 @@ public class DataBase {
 
     }
 
-    public LinkedData getData(String command, List<Object> values, List<String> col, boolean async){
+    public LinkedData getData(String command, List<Object> values, List<String> col, final boolean async){
 
         if(!isConnected()) return null;
 
@@ -306,7 +308,7 @@ public class DataBase {
 
     }
 
-    public Object getOrInsert(String table, String colon, Object data, Keys keys, boolean async){
+    public Object getOrInsert(final String table, final String colon, final Object data, final Keys keys, final boolean async){
 
         AtomicReference<Object> object = new AtomicReference<>();
 
@@ -342,7 +344,7 @@ public class DataBase {
         return null;
     }
 
-    public boolean containsData(SelectBuilder command, boolean async){
+    public boolean containsData(SelectBuilder command, final boolean async){
 
         if(!isConnected()) return false;
 

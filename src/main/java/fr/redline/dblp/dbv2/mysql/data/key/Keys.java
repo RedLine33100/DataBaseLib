@@ -9,7 +9,7 @@ public class Keys {
 
 	private final HashMap<String, KeyData> hashMap = new HashMap<>();
 
-	public Keys(String name, String colon, Symbol symbol, Object object) {
+	public Keys(final String name, final String colon, final Symbol symbol, final Object object) {
 		addKey(new KeyData(name, colon, symbol, object));
 	}
 	
@@ -51,7 +51,9 @@ public class Keys {
 			whereString.append(hashMapData.getValue().getColon()).append(hashMapData.getValue().getSymbol()).append("?");
 		}
 
-		return whereString.toString();
+		final String whereStringFinal = whereString.toString();
+
+		return whereStringFinal;
 
 	}
 	

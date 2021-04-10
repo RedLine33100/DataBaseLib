@@ -1,5 +1,7 @@
 package fr.redline.dblp.dbv2.mysql.cmd;
 
+import com.sun.istack.internal.NotNull;
+
 import java.util.List;
 
 public class SQLCmd {
@@ -8,7 +10,7 @@ public class SQLCmd {
     private final List<Object> values;
     private final String cmd;
 
-    public SQLCmd(String cmd, List<String> colToGet, List<Object> values){
+    public SQLCmd(@NotNull final String cmd, @NotNull final List<String> colToGet, @NotNull final List<Object> values){
         this.cmd = cmd;
         this.colToGet = colToGet;
         this.values = values;

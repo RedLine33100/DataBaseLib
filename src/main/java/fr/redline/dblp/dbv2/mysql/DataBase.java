@@ -201,7 +201,7 @@ public class DataBase {
 
                 PreparedStatement state = this.getConnection().prepareStatement(sqlCmd.getCmd());
                 CommandUtils.setValues(state, sqlCmd.getValues());
-                objectList.set(CommandUtils.convertResultToObjects(state.executeQuery(), sqlCmd.getColList()));
+                objectList.set(CommandUtils.convertResultToObjects(state.executeQuery()));
 
                 state.close();
 
@@ -217,7 +217,7 @@ public class DataBase {
         return objectList.get();
     }
 
-    public List<LinkedData> getDatas(String command, List<Object> values, List<String> col, final boolean async){
+    public List<LinkedData> getDatas(String command, List<Object> values, final boolean async){
 
         if(!isConnected()) return null;
 
@@ -229,7 +229,7 @@ public class DataBase {
 
                 PreparedStatement state = this.getConnection().prepareStatement(command);
                 CommandUtils.setValues(state, values);
-                objectList.set(CommandUtils.convertResultToObjects(state.executeQuery(), col));
+                objectList.set(CommandUtils.convertResultToObjects(state.executeQuery()));
 
                 state.close();
 
@@ -262,7 +262,7 @@ public class DataBase {
 
                 PreparedStatement state = this.getConnection().prepareStatement(sqlCmd.getCmd());
                 CommandUtils.setValues(state, sqlCmd.getValues());
-                objectList.set(CommandUtils.convertResultToObject(state.executeQuery(), sqlCmd.getColList()));
+                objectList.set(CommandUtils.convertResultToObject(state.executeQuery()));
 
                 state.close();
 
@@ -279,7 +279,7 @@ public class DataBase {
 
     }
 
-    public LinkedData getData(String command, List<Object> values, List<String> col, final boolean async){
+    public LinkedData getData(String command, List<Object> values, final boolean async){
 
         if(!isConnected()) return null;
 
@@ -291,7 +291,7 @@ public class DataBase {
 
                 PreparedStatement state = this.getConnection().prepareStatement(command);
                 CommandUtils.setValues(state, values);
-                objectList.set(CommandUtils.convertResultToObject(state.executeQuery(), col));
+                objectList.set(CommandUtils.convertResultToObject(state.executeQuery()));
 
                 state.close();
 

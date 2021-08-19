@@ -46,7 +46,7 @@ public class UpdateBuilder implements Command {
             objects.addAll(keys.getObjectList());
         }
         objects.addAll(appendSubCommand(cmd, Location.AFTER_WHERE));
-        return new SQLCmd(cmd.toString(), new ArrayList<>(), objects);
+        return new SQLCmd(cmd.toString(), objects);
     }
 
     public List<Object> appendSubCommand(StringBuilder stringBuilder, Location location) {

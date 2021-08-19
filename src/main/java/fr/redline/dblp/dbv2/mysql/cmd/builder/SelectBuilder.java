@@ -49,8 +49,6 @@ public class SelectBuilder implements Command {
     @Override
     public SQLCmd getSqlCmd() {
 
-        List<String> colSelect = new ArrayList<>(colonList.getColList());
-
         StringBuilder cmd = new StringBuilder();
         cmd.append("SELECT");
 
@@ -81,7 +79,7 @@ public class SelectBuilder implements Command {
 
         objects.addAll(appendSubCommand(cmd, Location.CMD_END));
 
-        return new SQLCmd(cmd.toString(), colSelect, objects);
+        return new SQLCmd(cmd.toString(), objects);
 
     }
 

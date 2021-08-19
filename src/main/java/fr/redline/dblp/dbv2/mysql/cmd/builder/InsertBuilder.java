@@ -42,7 +42,7 @@ public class InsertBuilder implements Command {
             interro.append("?");
         }
         cmd.append(interro).append(")");
-        return new SQLCmd(cmd.toString(), new ArrayList<>(), objects);
+        return new SQLCmd(cmd.toString(), objects);
     }
 
     @Override

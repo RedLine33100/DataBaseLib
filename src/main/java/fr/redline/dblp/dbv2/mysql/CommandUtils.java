@@ -62,17 +62,12 @@ public class CommandUtils {
         return interrogation.toString();
     }
 
-    public static List<LinkedData> convertResultToObjects(ResultSet result, List<String> objectColumn){
+    public static List<LinkedData> convertResultToObjects(ResultSet result){
         List<LinkedData> list = new ArrayList<>();
 
         try {
-            while(result.next()) {
-                LinkedData data = new LinkedData();
-                for(String column : objectColumn)
-                    data.addObject(column, result.getObject(column));
-
-                list.add(data);
-            }
+            while(result.next())
+                list.add(convertResultToObjectWN(result));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -80,13 +75,25 @@ public class CommandUtils {
         return list;
     }
 
-    public static LinkedData convertResultToObject(ResultSet result, List<String> objectColumn){
+    public static LinkedData convertResultToObject(ResultSet result){
+        try {
+            result.next();
+            return convertResultToObjectWN(result);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    private static LinkedData convertResultToObjectWN(ResultSet result){
         LinkedData list = new LinkedData();
 
         try {
-            result.next();
-            for(String column : objectColumn)
-                list.addObject(column, result.getObject(column));
+            for(int i = 0; i<result.getMetaData().getColumnCount(); i++) {
+                String colonne = result.getMetaData().getColumnName(i);
+                list.addObject(colonne, result.getObject(colonne));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
